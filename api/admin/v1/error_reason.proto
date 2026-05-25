@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package admin.v1;
+
+import "errors/errors.proto";
+
+option go_package = "kratos-admin/pb/admin/v1;v1";
+
+// 错误码规范: https://mcndtox23fs2.feishu.cn/wiki/KDK6w18zBiaQvak5d5ecfoLundZ
+// errors.code >= 500 错误为需要告警错误
+
+enum ErrorReason {
+    option (errors.default_code) = 500;
+  
+    SUCCESS = 0;
+    Unauthorized = 401 [(errors.code) = 401];
+    Forbidden = 403 [(errors.code) = 403];
+
+    // user start with 11
+    UserLoginFailed = 110001 [(errors.code) = 401];
+    UserNotLogin = 110002 [(errors.code) = 401];
+    UserNotFound = 110003 [(errors.code) = 404];
+    UserSegmentInvalidParams = 110004 [(errors.code) = 400]; // 用户分群参数错误
+    UserParamsError = 110005 [(errors.code) = 400];
+
+    // product start with 13
+    ProductNotFound = 130001 [(errors.code) = 404]; // 商品不存在
+    ProductParamsError = 130002 [(errors.code) = 400]; // 商品参数错误
+
+    // message start with 14
+    MessageInvalidParams = 140001 [(errors.code) = 400]; // 消息无效参数
+    MessageSubscribeError = 140002 [(errors.code) = 400]; // 消息订阅失败
+    MessageSending = 140003 [(errors.code) = 400]; // 消息发送中
+
+    // Advertising start with 15
+    AdvertisingParamsError = 150001 [(errors.code) = 400]; // 广告参数错误
+    AdvertisingInUsing = 150002 [(errors.code) = 400]; // 广告正在使用中
+
+    // payment start with 16
+    PaymentStrategyNotFound = 160001 [(errors.code) = 404]; // 支付策略不存在
+    PaymentStrategyTypeModifyForbidden = 160002 [(errors.code) = 400]; // 不允许修改 type = -1 的策略
+    PaymentOptimizerNotFound = 160003 [(errors.code) = 404]; // 优化师不存在或不是优化师
+    PaymentAdvertisingNotFound = 160004 [(errors.code) = 404]; // 广告推广位不存在
+    PaymentSaveFailed = 160005 [(errors.code) = 500]; // 支付策略保存失败
+    PaymentAccountStatus = 160006 [(errors.code) = 400]; // 支付账户状态异常
+    PaymentBonusInsufficient = 160007 [(errors.code) = 400]; // 支付账户扣减赠币余额不足
+    PaymentStrategyInvalidParams = 160008 [(errors.code) = 400]; // 支付策略参数错误
+
+    // ban rule start with 17
+
+    // whitelist error start with 18
+    WhiteListInvalidValue = 180001 [(errors.code) = 400]; // IP 格式非法
+    WhiteListAddFailed = 180002 [(errors.code) = 500]; // 添加白名单失败
+
+    // operate error start with 19
+    OperateAppVersionInvalid = 190001 [(errors.code) = 400]; // app版本不合法
+    // permission error start with 19
+    PermissionInvalidParams = 190002 [(errors.code) = 400]; // 参数错误（缺少 deviceId、banType 等）
+
+    // task error start with 20
+    TaskNotFound = 200001 [(errors.code) = 404];
+    TaskModifyForbidden = 200002 [(errors.code) = 400]; // 不允许修改
+    TaskHistoryInvalidParams = 200011 [(errors.code) = 400]; // 任务历史查询参数错误（缺少 deviceId、userId 等）
+
+    // popup start with 21
+    PopupParamsError = 210001 [(errors.code) = 400]; // 弹窗参数错误
+    PopupNotFound = 210002 [(errors.code) = 404]; // 弹窗不存在
+    PopupSaveFailed = 210003 [(errors.code) = 500]; // 弹窗保存失败
+
+    // tag start with 22
+    TagDeleteForbidden = 220001 [(errors.code) = 400]; // 不允许删除
+
+    // foryou start with 23
+    ForyouStrategyParamsError = 230001 [(errors.code) = 400]; // foryou策略参数错误
+
+    // material video start with 24
+    MaterialVideoParamsError = 240001[(errors.code) = 400];// 素材视频擦拭错误
+
+    // activity start with 25
+    ActivityParamsError = 250001 [(errors.code) = 400];
+}

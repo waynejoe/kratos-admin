@@ -1,0 +1,1098 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /v1/optimizer/list:
+        get:
+            tags:
+                - AdminUser
+            description: 获取优化师列表
+            operationId: AdminUser_ListOptimizer
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.ListOptimizerReply'
+    /v1/permission/group/delete:
+        delete:
+            tags:
+                - Permission
+            description: 删除团队
+            operationId: Permission_DeleteGroup
+            parameters:
+                - name: id
+                  in: query
+                  description: 团队id
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.EmptyReply'
+    /v1/permission/group/list:
+        get:
+            tags:
+                - Permission
+            description: 获取团队列表
+            operationId: Permission_ListGroup
+            parameters:
+                - name: pageIndex
+                  in: query
+                  description: 分页索引
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 分页大小
+                  schema:
+                    type: integer
+                    format: int32
+                - name: name
+                  in: query
+                  description: 团队名称
+                  schema:
+                    type: string
+                - name: ids
+                  in: query
+                  description: ids
+                  schema:
+                    type: array
+                    items:
+                        type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.ListGroupReply'
+    /v1/permission/group/member/list:
+        get:
+            tags:
+                - Permission
+            description: 获取团队成员列表
+            operationId: Permission_ListGroupMember
+            parameters:
+                - name: pageIndex
+                  in: query
+                  description: 分页索引
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 分页大小
+                  schema:
+                    type: integer
+                    format: int32
+                - name: groupId
+                  in: query
+                  description: groupId
+                  schema:
+                    type: string
+                - name: fuzzyQuery
+                  in: query
+                  description: 模糊查询
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.ListGroupMemberReply'
+    /v1/permission/group/member/save:
+        post:
+            tags:
+                - Permission
+            description: 保存团队成员信息
+            operationId: Permission_SaveGroupMember
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/admin.v1.SaveGroupMemberRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.EmptyReply'
+    /v1/permission/group/save:
+        post:
+            tags:
+                - Permission
+            description: 保存团队信息
+            operationId: Permission_SaveGroup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/admin.v1.SaveGroupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.SaveGroupReply'
+    /v1/permission/resource/delete:
+        delete:
+            tags:
+                - Permission
+            description: 删除菜单
+            operationId: Permission_DeleteResource
+            parameters:
+                - name: id
+                  in: query
+                  description: 资源id
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.EmptyReply'
+    /v1/permission/resource/import:
+        post:
+            tags:
+                - Permission
+            description: 导入菜单
+            operationId: Permission_ImportResource
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/admin.v1.ImportResourceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.EmptyReply'
+    /v1/permission/resource/list:
+        get:
+            tags:
+                - Permission
+            description: 获取菜单列表
+            operationId: Permission_ListResource
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.ListResourceReply'
+    /v1/permission/resource/save:
+        post:
+            tags:
+                - Permission
+            description: 保存菜单
+            operationId: Permission_SaveResource
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/admin.v1.SaveResourceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.SaveResourceReply'
+    /v1/permission/role/delete:
+        delete:
+            tags:
+                - Permission
+            description: 删除角色
+            operationId: Permission_DeleteRole
+            parameters:
+                - name: id
+                  in: query
+                  description: 角色id
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.EmptyReply'
+    /v1/permission/role/list:
+        get:
+            tags:
+                - Permission
+            description: 获取角色列表
+            operationId: Permission_ListRole
+            parameters:
+                - name: pageIndex
+                  in: query
+                  description: 分页索引
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 分页大小
+                  schema:
+                    type: integer
+                    format: int32
+                - name: name
+                  in: query
+                  description: 角色名称
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.ListRoleReply'
+    /v1/permission/role/member/list:
+        get:
+            tags:
+                - Permission
+            description: 角色成员列表
+            operationId: Permission_ListRoleMember
+            parameters:
+                - name: pageIndex
+                  in: query
+                  description: 分页索引
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 分页大小
+                  schema:
+                    type: integer
+                    format: int32
+                - name: roleId
+                  in: query
+                  description: roleId
+                  schema:
+                    type: string
+                - name: fuzzyQuery
+                  in: query
+                  description: 模糊查询
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.ListRoleMemberReply'
+    /v1/permission/role/permission/list:
+        get:
+            tags:
+                - Permission
+            description: 获取角色权限列表
+            operationId: Permission_ListRolePermission
+            parameters:
+                - name: roleId
+                  in: query
+                  description: 角色id
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.ListRolePermissionReply'
+    /v1/permission/role/permission/save:
+        post:
+            tags:
+                - Permission
+            description: 保存角色权限
+            operationId: Permission_SaveRolePermission
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/admin.v1.SaveRolePermissionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.EmptyReply'
+    /v1/permission/role/save:
+        post:
+            tags:
+                - Permission
+            description: 保存角色信息
+            operationId: Permission_SaveRole
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/admin.v1.SaveRoleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.SaveRoleReply'
+    /v1/user/info:
+        get:
+            tags:
+                - AdminUser
+            description: 获取登陆用户信息
+            operationId: AdminUser_GetUserInfo
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.GetUserInfoReply'
+    /v1/user/list:
+        get:
+            tags:
+                - AdminUser
+            description: 获取用户列表
+            operationId: AdminUser_ListAdminUser
+            parameters:
+                - name: pageIndex
+                  in: query
+                  description: 分页索引
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 分页大小
+                  schema:
+                    type: integer
+                    format: int32
+                - name: nickname
+                  in: query
+                  description: 用户名
+                  schema:
+                    type: string
+                - name: status
+                  in: query
+                  description: 用户状态
+                  schema:
+                    type: integer
+                    format: int32
+                - name: groupId
+                  in: query
+                  description: 团队id
+                  schema:
+                    type: string
+                - name: roleId
+                  in: query
+                  description: 角色id
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.ListAdminUserReply'
+    /v1/user/login:
+        post:
+            tags:
+                - AdminUser
+            description: 后台账号登陆
+            operationId: AdminUser_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/admin.v1.LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.LoginReply'
+    /v1/user/save:
+        post:
+            tags:
+                - AdminUser
+            description: 保存用户
+            operationId: AdminUser_SaveAdminUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/admin.v1.SaveAdminUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.SaveAdminUserReply'
+    v1/operation/log/list:
+        get:
+            tags:
+                - AdminUser
+            description: 查询审计日志列表
+            operationId: AdminUser_ListOperationLog
+            parameters:
+                - name: pageIndex
+                  in: query
+                  description: 分页索引
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 分页大小
+                  schema:
+                    type: integer
+                    format: int32
+                - name: url
+                  in: query
+                  description: url
+                  schema:
+                    type: string
+                - name: method
+                  in: query
+                  description: method
+                  schema:
+                    type: string
+                - name: startTime
+                  in: query
+                  description: 开始时间
+                  schema:
+                    type: string
+                - name: endTime
+                  in: query
+                  description: 结束时间
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.ListOperationLogReply'
+components:
+    schemas:
+        admin.v1.AdminUserInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 用户id
+                nickname:
+                    type: string
+                    description: 用户昵称
+                phone:
+                    type: string
+                    description: 用户手机号
+                status:
+                    type: integer
+                    description: '状态: 1 正常, 2 禁用'
+                    format: int32
+                createTime:
+                    type: string
+                    description: 创建时间
+                roles:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.AdminUserInfo_UserRole'
+                    description: 角色列表
+                groups:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.AdminUserInfo_UserGroup'
+                    description: 分组列表
+                operator:
+                    type: string
+                    description: 操作人
+            description: 管理员用户信息
+        admin.v1.AdminUserInfo_UserGroup:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 分组id
+                name:
+                    type: string
+                    description: 分组名称
+        admin.v1.AdminUserInfo_UserRole:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 角色id
+                name:
+                    type: string
+                    description: 角色名称
+        admin.v1.EmptyReply:
+            type: object
+            properties: {}
+        admin.v1.GetUserInfoReply:
+            type: object
+            properties:
+                id:
+                    type: string
+                nickname:
+                    type: string
+                avatar:
+                    type: string
+                permissions:
+                    allOf:
+                        - $ref: '#/components/schemas/admin.v1.UserPermission'
+                    description: 用户权限
+                closePermission:
+                    type: boolean
+        admin.v1.GroupInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 团队id
+                name:
+                    type: string
+                    description: 团队名称
+                dataIsolation:
+                    type: integer
+                    description: '数据隔离: 1 不隔离, 2 隔离'
+                    format: int32
+                userCount:
+                    type: integer
+                    description: 用户数量
+                    format: int32
+                createTime:
+                    type: string
+                    description: 团队创建时间
+                roles:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.GroupInfo_Role'
+                    description: 关联角色列表
+                operator:
+                    type: string
+                    description: 操作人
+            description: 团队信息
+        admin.v1.GroupInfo_Role:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 角色id
+                name:
+                    type: string
+                    description: 角色名称
+        admin.v1.GroupMemberInfo:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    description: 用户id
+                nickname:
+                    type: string
+                    description: 用户昵称
+                phone:
+                    type: string
+                    description: 用户手机号
+                status:
+                    type: integer
+                    description: '状态: 1 正常, 2 禁用'
+                    format: int32
+                roles:
+                    type: array
+                    items:
+                        type: string
+                    description: 角色列表
+                privilegeLevel:
+                    type: integer
+                    description: '数据权限级别: 1 仅查看个人数据, 2 可查看团队数据'
+                    format: int32
+            description: 团队成员信息
+        admin.v1.ImportResourceRequest:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.ResourceInfo'
+                    description: 资源列表
+            description: 导入资源
+        admin.v1.ListAdminUserReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.AdminUserInfo'
+                    description: 用户列表
+                page:
+                    allOf:
+                        - $ref: '#/components/schemas/admin.v1.PageInfo'
+                    description: 分页信息
+        admin.v1.ListGroupMemberReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.GroupMemberInfo'
+                    description: 团队成员列表
+                page:
+                    allOf:
+                        - $ref: '#/components/schemas/admin.v1.PageInfo'
+                    description: 分页信息
+            description: 获取团队成员列表回复
+        admin.v1.ListGroupReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.GroupInfo'
+                    description: 团队列表
+                page:
+                    allOf:
+                        - $ref: '#/components/schemas/admin.v1.PageInfo'
+                    description: 分页信息
+            description: 获取团队列表回复
+        admin.v1.ListOperationLogReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.OperationLog'
+                    description: 操作日志列表
+                page:
+                    allOf:
+                        - $ref: '#/components/schemas/admin.v1.PageInfo'
+                    description: 分页信息
+        admin.v1.ListOptimizerReply:
+            type: object
+            properties:
+                users:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.Optimizer'
+                    description: 用户列表
+        admin.v1.ListResourceReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.ResourceInfo'
+                    description: 菜单列表
+            description: 获取菜单列表回复
+        admin.v1.ListRoleMemberReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.RoleMemberInfo'
+                    description: 角色成员列表
+                page:
+                    allOf:
+                        - $ref: '#/components/schemas/admin.v1.PageInfo'
+                    description: 分页信息
+            description: 角色成员列表回复
+        admin.v1.ListRolePermissionReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.RoleResource'
+                    description: 权限列表
+            description: 获取角色权限回复
+        admin.v1.ListRoleReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.RoleInfo'
+                    description: 角色列表
+                page:
+                    allOf:
+                        - $ref: '#/components/schemas/admin.v1.PageInfo'
+                    description: 分页信息
+            description: 获取角色列表回复
+        admin.v1.LoginReply:
+            type: object
+            properties:
+                token:
+                    type: string
+        admin.v1.LoginRequest:
+            type: object
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+        admin.v1.OperationLog:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: id
+                url:
+                    type: string
+                    description: url
+                operator:
+                    type: string
+                    description: operator
+                method:
+                    type: string
+                    description: method
+                params:
+                    type: string
+                    description: 请求参数
+                response:
+                    type: string
+                    description: 响应内容
+                ip:
+                    type: string
+                    description: 请求ip
+                createTime:
+                    type: string
+                    description: 创建时间
+                updateTime:
+                    type: string
+                    description: 更新时间
+        admin.v1.Optimizer:
+            type: object
+            properties:
+                id:
+                    type: string
+                nickname:
+                    type: string
+            description: 优化师
+        admin.v1.PageInfo:
+            type: object
+            properties:
+                index:
+                    type: integer
+                    description: 当前分页
+                    format: int32
+                size:
+                    type: integer
+                    description: 每页条数
+                    format: int32
+                next:
+                    type: string
+                    description: 下一页参数
+                total:
+                    type: integer
+                    description: 总条数
+                    format: int32
+                isEnd:
+                    type: boolean
+                    description: 是否结束
+        admin.v1.ResourceInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 资源id
+                parentId:
+                    type: string
+                    description: 资源父id
+                name:
+                    type: string
+                    description: 资源名称
+                type:
+                    type: string
+                    description: '资源类型: menu, page, button, api'
+                path:
+                    type: string
+                    description: 资源路径
+                weight:
+                    type: integer
+                    description: 权重
+                    format: int32
+                apis:
+                    type: array
+                    items:
+                        type: string
+                    description: 关联api
+                children:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.ResourceInfo'
+                    description: 子资源
+            description: 资源信息
+        admin.v1.RoleInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 角色id
+                name:
+                    type: string
+                    description: 角色名称
+                userCount:
+                    type: integer
+                    description: 用户数量
+                    format: int32
+                operator:
+                    type: string
+                    description: 创建人
+                createTime:
+                    type: string
+                    description: 角色创建时间
+                group:
+                    allOf:
+                        - $ref: '#/components/schemas/admin.v1.RoleInfo_RoleGroup'
+                    description: 角色团队
+            description: 角色信息
+        admin.v1.RoleInfo_RoleGroup:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 团队id
+                name:
+                    type: string
+                    description: 团队名称
+                dataIsolation:
+                    type: integer
+                    description: '数据隔离: 1 不隔离, 2 隔离'
+                    format: int32
+        admin.v1.RoleMemberInfo:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    description: 用户id
+                nickname:
+                    type: string
+                    description: 用户昵称
+                phone:
+                    type: string
+                    description: 用户手机号
+                status:
+                    type: integer
+                    description: '状态: 1 正常, 2 禁用'
+                    format: int32
+            description: 角色成员
+        admin.v1.RoleResource:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 资源id
+                name:
+                    type: string
+                    description: 资源名称
+                type:
+                    type: string
+                    description: '资源类型: menu, page, button, api'
+                hasPermission:
+                    type: boolean
+                    description: 是否拥有权限
+                children:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.RoleResource'
+                    description: 子资源
+        admin.v1.SaveAdminUserReply:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 用户id
+            description: 保存用户回复
+        admin.v1.SaveAdminUserRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 用户id
+                nickname:
+                    type: string
+                    description: 用户昵称
+                phone:
+                    type: string
+                    description: 用户手机号
+                status:
+                    type: integer
+                    description: '状态: 1 正常, 2 禁用'
+                    format: int32
+                roleIds:
+                    type: array
+                    items:
+                        type: string
+                    description: 角色列表
+                groupIds:
+                    type: array
+                    items:
+                        type: string
+                    description: 分组列表
+            description: 保存用户
+        admin.v1.SaveGroupMemberRequest:
+            type: object
+            properties:
+                groupId:
+                    type: string
+                    description: 团队id
+                userId:
+                    type: string
+                    description: 用户id
+                privilegeLevel:
+                    type: integer
+                    description: '数据权限级别: 1 仅查看个人数据, 2 可查看团队数据'
+                    format: int32
+            description: 保存团队成员信息请求
+        admin.v1.SaveGroupReply:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 团队id
+            description: 保存团队信息回复
+        admin.v1.SaveGroupRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 团队id
+                name:
+                    type: string
+                    description: 团队名称
+                dataIsolation:
+                    type: integer
+                    description: '数据隔离: 1 不隔离, 2 隔离'
+                    format: int32
+            description: 保存团队信息请求
+        admin.v1.SaveResourceReply:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 资源id
+            description: 保存资源回复
+        admin.v1.SaveResourceRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 资源id
+                parentId:
+                    type: string
+                    description: 资源父id
+                name:
+                    type: string
+                    description: 资源名称
+                type:
+                    type: string
+                    description: '资源类型: menu, page, button, api'
+                path:
+                    type: string
+                    description: 资源路径
+                weight:
+                    type: integer
+                    description: 权重
+                    format: int32
+                apis:
+                    type: array
+                    items:
+                        type: string
+                    description: 关联api
+            description: 保存资源
+        admin.v1.SaveRolePermissionRequest:
+            type: object
+            properties:
+                roleId:
+                    type: string
+                    description: 角色id
+                resourceIds:
+                    type: array
+                    items:
+                        type: string
+                    description: 资源id
+            description: 保存角色权限
+        admin.v1.SaveRoleReply:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 角色id
+            description: 保存角色回复
+        admin.v1.SaveRoleRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 角色id
+                name:
+                    type: string
+                    description: 角色名称
+                groupId:
+                    type: string
+                    description: 团队id
+            description: 保存角色
+        admin.v1.UserPermissioPage:
+            type: object
+            properties:
+                path:
+                    type: string
+                    description: 可访问路径
+                children:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.UserPermissioPage'
+                    description: 子权限
+        admin.v1.UserPermission:
+            type: object
+            properties:
+                buttons:
+                    type: array
+                    items:
+                        type: string
+                    description: 可访问按钮
+                pages:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/admin.v1.UserPermissioPage'
+                    description: 可访问页面
+            description: 用户权限
+tags:
+    - name: AdminUser
+      description: 后台账号管理
+    - name: Permission

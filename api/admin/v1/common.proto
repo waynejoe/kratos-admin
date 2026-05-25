@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package admin.v1;
+
+import "validate/validate.proto";
+
+option go_package = "kratos-admin/pb/admin/v1;v1";
+
+message PageOption {
+    // 分页索引，必须大于等于 0
+    int32 index = 1 [(validate.rules).int32.gte = 0];
+    // 每页大小，必须大于等于 0
+    int32 size = 2 [(validate.rules).int32.gte = 0];
+}
+
+message PageInfo {
+  // 当前分页
+  int32 index = 1;
+  // 每页条数
+  int32 size = 2;
+  // 下一页参数
+  string next = 3;
+  // 总条数
+  int32 total = 4;
+  // 是否结束
+  bool isEnd = 5;
+}
+
+message EmptyReply{
+}
+
+// 分群分组信息
+message SegmentGroupItem{
+  // 分群ID
+  int64 segmentId = 1;
+  // 分群权重
+  int32 weight = 2;
+  // 分组名称
+  int64 groupId = 3;
+}
+
+// 分群分组信息
+message SegmentGroupInfo{
+  // 分群ID
+  int64 segmentId = 1;
+  // 分群权重
+  int32 weight = 2;
+  // 分组ID
+  int64 groupId = 3;
+  // 分群名称
+  string name = 4;
+  // 分组名称
+  string groupName = 5;
+}
+
+// 用户余额信息
+message UserBalance {
+  // 金币数
+  int32 coin = 1;
+  // 赠币数
+  int32 bonus = 2;
+  // 总币数
+  int32 totalCoins = 3;
+}

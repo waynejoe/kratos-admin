@@ -1,0 +1,52 @@
+version: "2"
+
+run:
+  timeout: 5m
+  relative-path-mode: gomod
+  concurrency: 4
+
+# issues:
+#   fix: true
+
+linters:
+  # default: all
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - asasalint
+    - bodyclose
+    - errorlint
+    - exptostd
+    - forbidigo
+    - goconst
+    - gocyclo
+    - goheader
+    - gosec
+    - misspell
+    - unconvert
+    - unparam
+    - wrapcheck
+    # - forcetypeassert
+  exclusions:
+    paths:
+      - "pb/"
+      - "_test.go$"
+  settings:
+    wrapcheck:
+      ignore-sigs:
+        - errorx.New(
+        - .WithStack(
+        - .Wrap(
+formatters:
+  enable:
+    - goimports
+#     - gci
+#     - gofmt
+#     - gofumpt
+#     - golines
+  exclusions:
+    paths:
+      - "pb/"

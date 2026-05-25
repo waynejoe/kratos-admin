@@ -1,0 +1,441 @@
+syntax = "proto3";
+
+package admin.v1;
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "admin/v1/common.proto";
+
+option go_package = "kratos-admin/pb/admin/v1;v1";
+
+service Permission {
+  /* 团队管理 */
+  // 获取团队列表
+  rpc ListGroup(ListGroupRequest) returns (ListGroupReply) {
+    option (google.api.http) = {
+      get: "/v1/permission/group/list"
+    };
+  }
+
+  // 保存团队信息
+  rpc SaveGroup(SaveGroupRequest) returns (SaveGroupReply) {
+    option (google.api.http) = {
+      post: "/v1/permission/group/save"
+      body: "*"
+    };
+  }
+
+  // 删除团队
+  rpc DeleteGroup(DeleteGroupRequest) returns (EmptyReply) {
+    option (google.api.http) = {
+      delete: "/v1/permission/group/delete"
+    };
+  }
+
+  // 获取团队成员列表
+  rpc ListGroupMember(ListGroupMemberRequest) returns (ListGroupMemberReply) {
+    option (google.api.http) = {
+      get: "/v1/permission/group/member/list"
+    };
+  }
+
+  // 保存团队成员信息
+  rpc SaveGroupMember(SaveGroupMemberRequest) returns (EmptyReply) {
+    option (google.api.http) = {
+      post: "/v1/permission/group/member/save"
+      body: "*"
+    };
+  }
+
+  /* 角色管理 */
+  // 获取角色列表
+  rpc ListRole(ListRoleRequest) returns (ListRoleReply) {
+    option (google.api.http) = {
+      get: "/v1/permission/role/list"
+    };
+  }
+
+  // 保存角色信息
+  rpc SaveRole(SaveRoleRequest) returns (SaveRoleReply) {
+    option (google.api.http) = {
+      post: "/v1/permission/role/save"
+      body: "*"
+    };
+  }
+
+  // 删除角色
+  rpc DeleteRole(DeleteRoleRequest) returns (EmptyReply) {
+    option (google.api.http) = {
+      delete: "/v1/permission/role/delete"
+    };
+  }
+
+  // 获取角色权限列表
+  rpc ListRolePermission(ListRolePermissionRequest) returns (ListRolePermissionReply) {
+    option (google.api.http) = {
+      get: "/v1/permission/role/permission/list"
+    };
+  }
+
+  // 保存角色权限
+  rpc SaveRolePermission(SaveRolePermissionRequest) returns (EmptyReply) {
+    option (google.api.http) = {
+      post: "/v1/permission/role/permission/save"
+      body: "*"
+    };
+  }
+
+  // 角色成员列表
+  rpc ListRoleMember(ListRoleMemberRequest) returns (ListRoleMemberReply) {
+    option (google.api.http) = {
+      get: "/v1/permission/role/member/list"
+    };
+  }
+
+  /* 菜单管理 */
+  // 获取菜单列表
+  rpc ListResource(ListResourceRequest) returns (ListResourceReply) {
+    option (google.api.http) = {
+      get: "/v1/permission/resource/list"
+    };
+  }
+
+  // 保存菜单
+  rpc SaveResource(SaveResourceRequest) returns (SaveResourceReply) {
+    option (google.api.http) = {
+      post: "/v1/permission/resource/save"
+      body: "*"
+    };
+  }
+
+  // 删除菜单
+  rpc DeleteResource(DeleteResourceRequest) returns (EmptyReply) {
+    option (google.api.http) = {
+      delete: "/v1/permission/resource/delete"
+    };
+  }
+
+  // 导入菜单
+  rpc ImportResource(ImportResourceRequest) returns (EmptyReply) {
+    option (google.api.http) = {
+      post: "/v1/permission/resource/import"
+      body: "*"
+    };
+  }
+
+}
+
+/* 团队管理 */
+// 团队信息
+message GroupInfo {
+  message Role {
+    // 角色id
+    int64 id = 1;
+    // 角色名称
+    string name = 2;
+  }
+
+  // 团队id
+  int64 id = 1;
+  // 团队名称
+  string name = 2;
+  // 数据隔离: 1 不隔离, 2 隔离
+  int32 dataIsolation = 3;
+  // 用户数量
+  int32 userCount = 4;
+  // 团队创建时间
+  int64 createTime = 5;
+  // 关联角色列表
+  repeated Role roles = 6;
+  // 操作人
+  string operator = 7;
+}
+
+// 获取团队列表请求
+message ListGroupRequest {
+  // 分页索引
+  int32 pageIndex = 1;
+  // 分页大小
+  int32 pageSize = 2;
+  // 团队名称
+  string name = 3;
+  // ids
+  repeated int64 ids = 4;
+}
+
+// 获取团队列表回复
+message ListGroupReply {
+  // 团队列表
+  repeated GroupInfo list = 1;
+  // 分页信息
+  PageInfo page = 2;
+}
+
+// 保存团队信息请求
+message SaveGroupRequest {
+   // 团队id
+  int64 id = 1;
+  // 团队名称
+  string name = 2 [(validate.rules).string.min_len = 1];
+  // 数据隔离: 1 不隔离, 2 隔离
+  int32 dataIsolation = 3 [(validate.rules).int32 = { in: [1, 2]}];
+}
+
+// 保存团队信息回复
+message SaveGroupReply {
+    // 团队id
+    int64 id = 1;
+}
+
+// 删除团队请求
+message DeleteGroupRequest {
+    // 团队id
+    int64 id = 1;
+}
+
+// 获取团队成员列表请求
+message ListGroupMemberRequest {
+  // 分页索引
+  int32 pageIndex = 1;
+  // 分页大小
+  int32 pageSize = 2;
+  // groupId
+  int64 groupId = 3 [(validate.rules).int64.gt = 0];
+  // 模糊查询
+  string fuzzyQuery = 4;
+}
+
+// 获取团队成员列表回复
+message ListGroupMemberReply {
+  // 团队成员列表
+  repeated GroupMemberInfo list = 1;
+  // 分页信息
+  PageInfo page = 2;
+}
+
+// 团队成员信息
+message GroupMemberInfo {
+  // 用户id
+  int64 userId = 1;
+  // 用户昵称
+  string nickname = 2;
+  // 用户手机号
+  string phone = 3;
+  // 状态: 1 正常, 2 禁用
+  int32 status = 4;
+  // 角色列表
+  repeated string roles = 5;
+  // 数据权限级别: 1 仅查看个人数据, 2 可查看团队数据
+  int32 privilegeLevel = 6;
+}
+
+// 保存团队成员信息请求
+message SaveGroupMemberRequest {
+  // 团队id
+  int64 groupId = 1;
+  // 用户id
+  int64 userId = 2;
+  // 数据权限级别: 1 仅查看个人数据, 2 可查看团队数据
+  int32 privilegeLevel = 3;
+}
+
+/* 角色管理 */
+
+// 角色信息
+message RoleInfo {
+  message RoleGroup {
+    // 团队id
+    int64 id = 1;
+    // 团队名称
+    string name = 2;
+    // 数据隔离: 1 不隔离, 2 隔离
+    int32 dataIsolation = 3;
+  }
+
+  // 角色id
+  int64 id = 1;
+  // 角色名称
+  string name = 2;
+  // 用户数量
+  int32 userCount = 3;
+  // 创建人
+  string operator = 4;
+  // 角色创建时间
+  int64 createTime = 5;
+  // 角色团队
+  RoleGroup group = 6;
+}
+
+// 获取角色列表请求
+message ListRoleRequest {
+  // 分页索引
+  int32 pageIndex = 1;
+  // 分页大小
+  int32 pageSize = 2;
+  // 角色名称
+  string name = 3;
+}
+
+// 获取角色列表回复
+message ListRoleReply {
+  // 角色列表
+  repeated RoleInfo list = 1;
+  // 分页信息
+  PageInfo page = 2;
+}
+
+// 保存角色
+message SaveRoleRequest {
+  // 角色id
+  int64 id = 1;
+  // 角色名称
+  string name = 2 [(validate.rules).string.min_len = 1];
+  // 团队id
+  int64 groupId = 3 [(validate.rules).int64.gt = 0];
+}
+
+// 保存角色回复
+message SaveRoleReply {
+  // 角色id
+  int64 id = 1;
+}
+
+// 删除角色
+message DeleteRoleRequest {
+  // 角色id
+  int64 id = 1;
+}
+
+// 角色成员
+message RoleMemberInfo {
+  // 用户id
+  int64 userId = 1;
+  // 用户昵称
+  string nickname = 2;
+  // 用户手机号
+  string phone = 3;
+  // 状态: 1 正常, 2 禁用
+  int32 status = 4;
+}
+
+// 角色成员列表请求
+message ListRoleMemberRequest {
+  // 分页索引
+  int32 pageIndex = 1;
+  // 分页大小
+  int32 pageSize = 2;
+  // roleId
+  int64 roleId = 3 [(validate.rules).int64.gt = 0];
+  // 模糊查询
+  string fuzzyQuery = 4;
+}
+
+// 角色成员列表回复
+message ListRoleMemberReply {
+  // 角色成员列表
+  repeated RoleMemberInfo list = 1;
+  // 分页信息
+  PageInfo page = 2;
+}
+
+// 保存角色权限
+message SaveRolePermissionRequest {
+  // 角色id
+  int64 roleId = 1;
+  // 资源id
+  repeated int64 resourceIds = 2;
+}
+
+// 获取角色权限
+message ListRolePermissionRequest {
+  // 角色id
+  int64 roleId = 1;
+}
+
+// 获取角色权限回复
+message ListRolePermissionReply {
+  // 权限列表
+  repeated RoleResource list = 1;
+}
+
+message RoleResource {
+  // 资源id
+  int64 id = 1;
+  // 资源名称
+  string name = 2;
+  // 资源类型: menu, page, button, api 
+  string type = 3;
+  // 是否拥有权限
+  bool hasPermission = 4;
+
+  // 子资源
+  repeated RoleResource children = 5;
+}
+
+/* 资源管理 */
+// 资源信息
+message ResourceInfo {
+  // 资源id
+  int64 id = 1;
+  // 资源父id
+  int64 parentId = 2;
+  // 资源名称
+  string name = 3;
+  // 资源类型: menu, page, button, api 
+  string type = 4;
+  // 资源路径
+  string path = 5;
+    // 权重
+  int32 weight = 6;
+  // 关联api
+  repeated string apis = 7;
+
+  // 子资源
+  repeated ResourceInfo children = 8;
+}
+
+// 获取菜单列表
+message ListResourceRequest {
+}
+
+// 获取菜单列表回复
+message ListResourceReply {
+  // 菜单列表
+  repeated ResourceInfo list = 1;
+}
+
+// 保存资源
+message SaveResourceRequest {
+  // 资源id
+  int64 id = 1;
+  // 资源父id
+  int64 parentId = 2;
+  // 资源名称
+  string name = 3 [(validate.rules).string.min_len = 1];
+  // 资源类型: menu, page, button, api 
+  string type = 4 [(validate.rules).string = { in: ["menu", "page", "button", "api"]}];
+  // 资源路径
+  string path = 5 [(validate.rules).string.min_len = 1];;
+  // 权重
+  int32 weight = 6;
+  // 关联api
+  repeated string apis = 7;
+}
+
+// 保存资源回复
+message SaveResourceReply {
+  // 资源id
+  int64 id = 1;
+}
+
+// 删除资源
+message DeleteResourceRequest {
+  // 资源id
+  int64 id = 1;
+}
+
+// 导入资源
+message ImportResourceRequest {
+  // 资源列表
+  repeated ResourceInfo data = 1;
+}

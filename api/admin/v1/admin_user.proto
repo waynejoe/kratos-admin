@@ -1,0 +1,226 @@
+syntax = "proto3";
+
+package admin.v1;
+
+import "google/api/annotations.proto";
+import "admin/v1/common.proto";
+
+option go_package = "kratos-admin/pb/admin/v1;v1";
+
+// 后台账号管理
+service AdminUser {
+  // 后台账号登陆
+  rpc Login(LoginRequest) returns(LoginReply) {
+    option (google.api.http) = {
+      post: "/v1/user/login",
+      body: "*",
+    };
+  };
+
+  // 获取登陆用户信息
+  rpc GetUserInfo(GetUserInfoRequest) returns(GetUserInfoReply) {
+    option (google.api.http) = {
+      get: "/v1/user/info",
+    };
+  };
+
+  // 获取用户列表
+  rpc ListAdminUser(ListAdminUserRequest) returns(ListAdminUserReply) {
+    option (google.api.http) = {
+      get: "/v1/user/list",
+    };
+  };
+
+  // 保存用户
+  rpc SaveAdminUser(SaveAdminUserRequest) returns(SaveAdminUserReply) {
+    option (google.api.http) = {
+      post: "/v1/user/save",
+      body: "*",
+    };
+  };
+
+  // 获取优化师列表
+  rpc ListOptimizer(ListOptimizerRequest) returns(ListOptimizerReply) {
+    option (google.api.http) = {
+      get: "/v1/optimizer/list",
+    };
+  };
+  // 查询审计日志列表
+  rpc ListOperationLog(ListOperationLogRequest) returns(ListOperationLogReply){
+    option (google.api.http) = {
+      get: "v1/operation/log/list",
+    };
+  }
+}
+
+// 管理员用户信息
+message AdminUserInfo {
+  message UserRole {
+    // 角色id
+    int64 id = 1;
+    // 角色名称
+    string name = 2;
+  }
+
+  message UserGroup {
+    // 分组id
+    int64 id = 1;
+    // 分组名称
+    string name = 2;
+  }
+
+  // 用户id
+  int64 id = 1;
+  // 用户昵称
+  string nickname = 2;
+  // 用户手机号
+  string phone = 3;
+  // 状态: 1 正常, 2 禁用
+  int32 status = 4;
+  // 创建时间
+  int64 createTime = 5;
+  // 角色列表
+  repeated UserRole roles = 6;
+  // 分组列表
+  repeated UserGroup groups = 7;
+  // 操作人
+  string operator = 8;
+}
+
+// 获取用户列表
+message ListAdminUserRequest {
+  // 分页索引
+  int32 pageIndex = 1;
+  // 分页大小
+  int32 pageSize = 2;
+  // 用户名
+  string nickname = 3;
+  // 用户状态
+  int32 status = 4;
+  // 团队id
+  int64 groupId = 5;
+  // 角色id
+  int64 roleId = 6;
+}
+
+message ListAdminUserReply {
+  // 用户列表
+  repeated AdminUserInfo list = 1;
+  // 分页信息
+  PageInfo page = 2;
+}
+
+// 保存用户
+message SaveAdminUserRequest {
+  // 用户id
+  int64 id = 1;
+  // 用户昵称
+  string nickname = 2;
+  // 用户手机号
+  string phone = 3;
+  // 状态: 1 正常, 2 禁用
+  int32 status = 4;
+  // 角色列表
+  repeated int64 roleIds = 5;
+  // 分组列表
+  repeated int64 groupIds = 6;
+}
+
+// 保存用户回复
+message SaveAdminUserReply {
+  // 用户id
+  int64 id = 1;
+}
+
+// 获取登陆用户信息
+message GetUserInfoRequest {}
+
+message GetUserInfoReply {
+  int64 id = 1;
+  string nickname = 2;
+  string avatar = 3;
+  // 用户权限
+  UserPermission permissions = 4;
+  bool closePermission = 5; // 是否关闭权限
+}
+
+// 用户权限
+message UserPermission {
+  // 可访问按钮
+  repeated string buttons = 1;
+  // 可访问页面
+  repeated UserPermissioPage pages = 2;
+}
+
+message UserPermissioPage {
+  // 可访问路径
+  string path = 1;
+  // 子权限
+  repeated UserPermissioPage children = 2;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginReply {
+  string token = 1;
+}
+
+// 优化师
+message Optimizer { 
+  int64 id = 1;
+  string nickname = 2;
+}
+
+message ListOptimizerRequest {
+}
+
+message ListOptimizerReply {
+  // 用户列表
+  repeated Optimizer users = 1;
+}
+
+message ListOperationLogRequest {
+  // 分页索引
+  int32 pageIndex = 1;
+  // 分页大小
+  int32 pageSize = 2;
+  // url 
+  string url = 3;
+  // method 
+  string method = 4;
+  // 开始时间
+  int64 startTime = 5;
+  // 结束时间
+  int64 endTime = 6;
+}
+
+message ListOperationLogReply {
+  // 操作日志列表
+  repeated OperationLog list = 1;
+  // 分页信息
+  PageInfo page = 2;
+}
+
+message OperationLog {
+  // id
+  int64 id = 1;
+  // url 
+  string url = 2;
+  // operator
+  string operator = 3;
+  // method 
+  string method = 4;
+  // 请求参数
+  string params = 5;
+  // 响应内容
+  string response = 6;
+  // 请求ip 
+  string ip = 7;
+  // 创建时间
+  int64 createTime = 8;
+  // 更新时间
+  int64 updateTime = 9;
+}

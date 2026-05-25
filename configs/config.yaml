@@ -1,0 +1,27 @@
+server:
+  http:
+    addr: ":18080"
+  grpc:
+    addr: ":19090"
+data:
+  global:
+    admin_database:
+      driver: mysql
+      source: "user:password@tcp(127.0.0.1:3306)/mome_admin?parseTime=True&loc=Local"
+    redis:
+      addr: "127.0.0.1:6379"
+      password: ""
+      db: 0
+security:
+  jwt_secret: change-me-in-production
+  jwt_ttl: 1209600
+  jwt_skip_paths:
+    - POST:/v1/user/login
+  third_paths: []
+permission:
+  close_permission: false
+  skip_paths:
+    - POST:/v1/user/login
+    - GET:/v1/user/info
+    - GET:/v1/optimizer/list
+  data_permission_paths: []
