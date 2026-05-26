@@ -24,6 +24,14 @@ service AdminUser {
     };
   };
 
+  // 退出登录
+  rpc Logout(LogoutRequest) returns(LogoutReply) {
+    option (google.api.http) = {
+      post: "/v1/user/logout",
+      body: "*",
+    };
+  };
+
   // 获取用户列表
   rpc ListAdminUser(ListAdminUserRequest) returns(ListAdminUserReply) {
     option (google.api.http) = {
@@ -167,6 +175,10 @@ message LoginRequest {
 message LoginReply {
   string token = 1;
 }
+
+message LogoutRequest {}
+
+message LogoutReply {}
 
 // 优化师
 message Optimizer { 

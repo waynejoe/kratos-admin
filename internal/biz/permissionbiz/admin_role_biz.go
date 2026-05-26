@@ -5,10 +5,10 @@ import (
 	"errors"
 	"slices"
 
+	"gorm.io/gorm"
 	toolboxauthz "kratos-admin/pkg/toolbox/authz"
 	"kratos-admin/pkg/toolbox/errorx"
 	"kratos-admin/pkg/toolbox/utils"
-	"gorm.io/gorm"
 
 	"kratos-admin/internal/authz"
 	factory "kratos-admin/internal/biz/permissionbiz/factory"
@@ -51,7 +51,7 @@ func (s *AdminRoleUsecase) ListRole(ctx context.Context, req *pb.ListRoleRequest
 
 	groupIds := utils.Map(data, func(in *adminmodel.AdminRole) int64 { return in.GroupId })
 
-	groups, err := s.adminGroupRepo.GetsMap(ctx, groupIds)
+	groups, err := s.adminGroupRepo.RawGetsMap(ctx, groupIds)
 	if err != nil {
 		return nil, err
 	}
@@ -65,9 +65,13 @@ func (s *AdminRoleUsecase) ListRole(ctx context.Context, req *pb.ListRoleRequest
 		roleUsers[roleId] = s.adminRoleRepo.GetUsersForRole(factory.NewRoleSubject(roleId))
 	}
 
-	operators, err := s.adminUserRepo.GetsMap(ctx, utils.Map(data, func(in *adminmodel.AdminRole) int64 { return in.OperatorId }))
+	operatorList, err := s.adminUserRepo.RawGetsBy(ctx, "`id` IN ?", utils.Map(data, func(in *adminmodel.AdminRole) int64 { return in.OperatorId }))
 	if err != nil {
 		return nil, errorx.WithStack(err)
+	}
+	operators := make(map[int64]*adminmodel.AdminUser)
+	for _, operator := range operatorList {
+		operators[operator.Id] = operator
 	}
 
 	return &pb.ListRoleReply{
@@ -200,7 +204,7 @@ func (s *AdminRoleUsecase) ListRoleMember(ctx context.Context, req *pb.ListRoleM
 
 	userIds := utils.CutPage(roleUsers, req.PageIndex, req.PageSize)
 
-	users, err := s.adminUserRepo.Gets(ctx, userIds)
+	users, err := s.adminUserRepo.RawGets(ctx, userIds)
 	if err != nil {
 		return nil, err
 	}

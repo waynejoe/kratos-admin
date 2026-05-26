@@ -41,7 +41,7 @@ func NewAdminUserUsecase(
 func (uc *AdminUserUsecase) GetUserInfo(ctx context.Context, _ *pb.GetUserInfoRequest) (*pb.GetUserInfoReply, error) {
 	userId := helpx.GetUserId(ctx)
 
-	user, err := uc.adminUserRepo.Get(ctx, userId)
+	user, err := uc.adminUserRepo.DirectGet(ctx, userId)
 	if err != nil {
 		return nil, errorx.WithStack(err)
 	}

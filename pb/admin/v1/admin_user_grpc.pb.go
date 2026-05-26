@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	AdminUser_Login_FullMethodName            = "/admin.v1.AdminUser/Login"
 	AdminUser_GetUserInfo_FullMethodName      = "/admin.v1.AdminUser/GetUserInfo"
+	AdminUser_Logout_FullMethodName           = "/admin.v1.AdminUser/Logout"
 	AdminUser_ListAdminUser_FullMethodName    = "/admin.v1.AdminUser/ListAdminUser"
 	AdminUser_SaveAdminUser_FullMethodName    = "/admin.v1.AdminUser/SaveAdminUser"
 	AdminUser_ListOptimizer_FullMethodName    = "/admin.v1.AdminUser/ListOptimizer"
@@ -37,6 +38,8 @@ type AdminUserClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginReply, error)
 	// 获取登陆用户信息
 	GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoReply, error)
+	// 退出登录
+	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutReply, error)
 	// 获取用户列表
 	ListAdminUser(ctx context.Context, in *ListAdminUserRequest, opts ...grpc.CallOption) (*ListAdminUserReply, error)
 	// 保存用户
@@ -69,6 +72,16 @@ func (c *adminUserClient) GetUserInfo(ctx context.Context, in *GetUserInfoReques
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserInfoReply)
 	err := c.cc.Invoke(ctx, AdminUser_GetUserInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminUserClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LogoutReply)
+	err := c.cc.Invoke(ctx, AdminUser_Logout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -125,6 +138,8 @@ type AdminUserServer interface {
 	Login(context.Context, *LoginRequest) (*LoginReply, error)
 	// 获取登陆用户信息
 	GetUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoReply, error)
+	// 退出登录
+	Logout(context.Context, *LogoutRequest) (*LogoutReply, error)
 	// 获取用户列表
 	ListAdminUser(context.Context, *ListAdminUserRequest) (*ListAdminUserReply, error)
 	// 保存用户
@@ -148,6 +163,9 @@ func (UnimplementedAdminUserServer) Login(context.Context, *LoginRequest) (*Logi
 }
 func (UnimplementedAdminUserServer) GetUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserInfo not implemented")
+}
+func (UnimplementedAdminUserServer) Logout(context.Context, *LogoutRequest) (*LogoutReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method Logout not implemented")
 }
 func (UnimplementedAdminUserServer) ListAdminUser(context.Context, *ListAdminUserRequest) (*ListAdminUserReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAdminUser not implemented")
@@ -214,6 +232,24 @@ func _AdminUser_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AdminUserServer).GetUserInfo(ctx, req.(*GetUserInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminUser_Logout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogoutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminUserServer).Logout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdminUser_Logout_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminUserServer).Logout(ctx, req.(*LogoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -304,6 +340,10 @@ var AdminUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserInfo",
 			Handler:    _AdminUser_GetUserInfo_Handler,
+		},
+		{
+			MethodName: "Logout",
+			Handler:    _AdminUser_Logout_Handler,
 		},
 		{
 			MethodName: "ListAdminUser",

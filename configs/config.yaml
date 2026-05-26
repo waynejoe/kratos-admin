@@ -1,13 +1,13 @@
 server:
   http:
-    addr: ":18080"
+    addr: ":8202"
   grpc:
-    addr: ":19090"
+    addr: ":9202"
 data:
   global:
     admin_database:
       driver: mysql
-      source: "user:password@tcp(127.0.0.1:3306)/mome_admin?parseTime=True&loc=Local"
+      source: "root:123456@tcp(localhost:3306)/syntra?parseTime=true&loc=Asia%2FShanghai&charset=utf8mb4&collation=utf8mb4_0900_ai_ci"
     redis:
       addr: "127.0.0.1:6379"
       password: ""
@@ -22,6 +22,7 @@ permission:
   close_permission: false
   skip_paths:
     - POST:/v1/user/login
+    - POST:/v1/user/logout
     - GET:/v1/user/info
     - GET:/v1/optimizer/list
   data_permission_paths: []

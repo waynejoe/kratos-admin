@@ -75,3 +75,15 @@ GOCACHE=/tmp/go-build go run ./cmd/kratos-admin -conf ./configs/config.yaml
 ```
 
 仅重新生成 API：`make api`。
+
+## 菜单资源（权限管理）
+
+菜单管理数据应与 **权限管理单模块** 一致，不要导入 mome 全量 `AuthMenu`（含「基础配置」「访问管理」等）。
+
+标准模板：`configs/permission_resources.json`（仅根节点 `permission` → 团队 / 角色 / 用户 / 菜单管理，无短剧媒资按钮）。
+
+首次或纠正数据时：
+
+1. 在菜单管理页删除错误的根菜单（如「基础配置」「管理后台设置」等）
+2. 使用前端「标准模板」或导入上述 JSON（`admin-frontend/public/permission_resources.json` 与 configs 同步）
+3. 为超级管理员角色勾选新菜单权限

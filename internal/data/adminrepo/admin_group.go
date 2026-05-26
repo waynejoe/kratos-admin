@@ -85,7 +85,7 @@ func (r *AdminGroupRepo) GetUserGroups(ctx context.Context, userIds ...int64) (m
 		groupIds = append(groupIds, ids...)
 	}
 
-	groups, err := r.Gets(ctx, groupIds)
+	groups, err := r.RawGetsBy(ctx, "`id` IN ? AND `deleted` = ?", groupIds, adminmodel.NotDel)
 	if err != nil {
 		return nil, errorx.WithStack(err)
 	}

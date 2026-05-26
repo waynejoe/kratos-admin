@@ -27,9 +27,9 @@ func (repo *Repo[T]) DB(ctx context.Context) *gorm.DB {
 func (repo *Repo[T]) Tx(ctx context.Context) (*gorm.DB, bool) {
 	tx, ok := ctx.Value(txContextKey{}).(*gorm.DB)
 	if ok {
-		return tx.Model(repo.config.model).WithContext(ctx), true
+		return tx.Model(&repo.config.model).WithContext(ctx), true
 	}
-	db := repo.db.Model(repo.config.model).WithContext(ctx)
+	db := repo.db.Model(&repo.config.model).WithContext(ctx)
 	if _, ok := ctx.Value(forceMasterContextKey{}).(bool); repo.config.forceMaster || ok {
 		db = db.Clauses(ForceMasterHint)
 	}
@@ -82,14 +82,14 @@ func (repo *Repo[T]) RawGets(ctx context.Context, ids []int64) ([]*T, error) {
 }
 
 func (repo *Repo[T]) Create(ctx context.Context, entity *T) error {
-	err := repo.DB(ctx).Omit(omitColumns...).Create(entity).Error
+	err := repo.db.WithContext(ctx).Model(entity).Omit(omitColumns...).Create(entity).Error
 	return errorx.WithStack(err)
 }
 
 func (repo *Repo[T]) Update(ctx context.Context, entity *T, columns ...string) error {
 	current := any(entity).(Entity)
 
-	db := repo.DB(ctx).Omit(omitColumns...).Where("id = ?", current.PKVal())
+	db := repo.db.WithContext(ctx).Model(entity).Omit(omitColumns...).Where("id = ?", current.PKVal())
 
 	if len(columns) > 0 {
 		// 更新指定列
@@ -124,7 +124,7 @@ func (repo *Repo[T]) Del(ctx context.Context, entity *T) error {
 		//nolint:wrapcheck
 		return errors.New("pk val = 0")
 	}
-	err := repo.DB(ctx).Delete(entity).Error
+	err := repo.db.WithContext(ctx).Model(entity).Delete(entity).Error
 	return errorx.WithStack(err)
 }
 

@@ -24,6 +24,7 @@ const OperationAdminUserListAdminUser = "/admin.v1.AdminUser/ListAdminUser"
 const OperationAdminUserListOperationLog = "/admin.v1.AdminUser/ListOperationLog"
 const OperationAdminUserListOptimizer = "/admin.v1.AdminUser/ListOptimizer"
 const OperationAdminUserLogin = "/admin.v1.AdminUser/Login"
+const OperationAdminUserLogout = "/admin.v1.AdminUser/Logout"
 const OperationAdminUserSaveAdminUser = "/admin.v1.AdminUser/SaveAdminUser"
 
 type AdminUserHTTPServer interface {
@@ -37,6 +38,8 @@ type AdminUserHTTPServer interface {
 	ListOptimizer(context.Context, *ListOptimizerRequest) (*ListOptimizerReply, error)
 	// Login 后台账号登陆
 	Login(context.Context, *LoginRequest) (*LoginReply, error)
+	// Logout 退出登录
+	Logout(context.Context, *LogoutRequest) (*LogoutReply, error)
 	// SaveAdminUser 保存用户
 	SaveAdminUser(context.Context, *SaveAdminUserRequest) (*SaveAdminUserReply, error)
 }
@@ -45,6 +48,7 @@ func RegisterAdminUserHTTPServer(s *http.Server, srv AdminUserHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/user/login", _AdminUser_Login0_HTTP_Handler(srv))
 	r.GET("/v1/user/info", _AdminUser_GetUserInfo0_HTTP_Handler(srv))
+	r.POST("/v1/user/logout", _AdminUser_Logout0_HTTP_Handler(srv))
 	r.GET("/v1/user/list", _AdminUser_ListAdminUser0_HTTP_Handler(srv))
 	r.POST("/v1/user/save", _AdminUser_SaveAdminUser0_HTTP_Handler(srv))
 	r.GET("/v1/optimizer/list", _AdminUser_ListOptimizer0_HTTP_Handler(srv))
@@ -88,6 +92,28 @@ func _AdminUser_GetUserInfo0_HTTP_Handler(srv AdminUserHTTPServer) func(ctx http
 			return err
 		}
 		reply := out.(*GetUserInfoReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _AdminUser_Logout0_HTTP_Handler(srv AdminUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in LogoutRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminUserLogout)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Logout(ctx, req.(*LogoutRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*LogoutReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -182,6 +208,8 @@ type AdminUserHTTPClient interface {
 	ListOptimizer(ctx context.Context, req *ListOptimizerRequest, opts ...http.CallOption) (rsp *ListOptimizerReply, err error)
 	// Login 后台账号登陆
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginReply, err error)
+	// Logout 退出登录
+	Logout(ctx context.Context, req *LogoutRequest, opts ...http.CallOption) (rsp *LogoutReply, err error)
 	// SaveAdminUser 保存用户
 	SaveAdminUser(ctx context.Context, req *SaveAdminUserRequest, opts ...http.CallOption) (rsp *SaveAdminUserReply, err error)
 }
@@ -256,6 +284,20 @@ func (c *AdminUserHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, o
 	pattern := "/v1/user/login"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAdminUserLogin))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// Logout 退出登录
+func (c *AdminUserHTTPClientImpl) Logout(ctx context.Context, in *LogoutRequest, opts ...http.CallOption) (*LogoutReply, error) {
+	var out LogoutReply
+	pattern := "/v1/user/logout"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAdminUserLogout))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

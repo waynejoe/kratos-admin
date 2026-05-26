@@ -1,0 +1,164 @@
+[
+  {
+    "type": "menu",
+    "name": "权限管理",
+    "path": "permission",
+    "children": [
+      {
+        "type": "menu",
+        "path": "team_management",
+        "name": "团队管理",
+        "apis": ["/v1/permission/group/list"],
+        "children": [
+          {
+            "type": "button",
+            "name": "查看",
+            "path": "team_management:view"
+          },
+          {
+            "type": "button",
+            "path": "team_management:add",
+            "name": "新建团队",
+            "apis": ["/v1/permission/group/save"]
+          },
+          {
+            "type": "button",
+            "path": "team_management:edit",
+            "name": "编辑",
+            "apis": ["/v1/permission/group/save"]
+          },
+          {
+            "type": "button",
+            "path": "team_management:delete",
+            "name": "删除",
+            "apis": ["/v1/permission/group/delete"]
+          },
+          {
+            "type": "button",
+            "path": "team_management:member_management",
+            "name": "成员管理",
+            "apis": [
+              "/v1/permission/group/member/list",
+              "/v1/permission/group/member/save"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "menu",
+        "path": "role_management",
+        "name": "角色管理",
+        "apis": ["/v1/permission/group/list", "/v1/permission/role/list"],
+        "children": [
+          {
+            "type": "button",
+            "name": "查看",
+            "path": "role_management:view"
+          },
+          {
+            "type": "button",
+            "path": "role_management:add",
+            "name": "新建角色",
+            "apis": ["/v1/permission/role/save"]
+          },
+          {
+            "type": "button",
+            "path": "role_management:edit",
+            "name": "编辑角色",
+            "apis": ["/v1/permission/role/save"]
+          },
+          {
+            "type": "button",
+            "path": "role_management:delete",
+            "name": "删除角色",
+            "apis": ["/v1/permission/role/delete"]
+          },
+          {
+            "type": "button",
+            "path": "role_management:permission_assign",
+            "name": "权限管理",
+            "apis": [
+              "/v1/permission/role/permission/save",
+              "/v1/permission/resource/list",
+              "/v1/permission/role/permission/list"
+            ]
+          },
+          {
+            "type": "button",
+            "path": "role_management:member_management",
+            "name": "成员管理",
+            "apis": [
+              "/v1/permission/role/member/list"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "menu",
+        "path": "user_management",
+        "name": "用户管理",
+        "apis": [
+          "/v1/permission/group/list",
+          "/v1/user/list",
+          "/v1/permission/role/list"
+        ],
+        "children": [
+          {
+            "type": "button",
+            "name": "查看",
+            "path": "user_management:view"
+          },
+          {
+            "type": "button",
+            "path": "user_management:edit",
+            "name": "编辑用户",
+            "apis": ["/v1/user/save"]
+          }
+        ]
+      },
+      {
+        "type": "menu",
+        "path": "menu_management",
+        "name": "菜单管理",
+        "apis": ["/v1/permission/resource/list"],
+        "children": [
+          {
+            "type": "button",
+            "name": "查看",
+            "path": "menu_management:view"
+          },
+          {
+            "type": "button",
+            "path": "menu_management:add_child",
+            "name": "新增子项",
+            "apis": ["/v1/permission/resource/save"]
+          },
+          {
+            "type": "button",
+            "path": "menu_management:edit",
+            "name": "编辑",
+            "apis": ["/v1/permission/resource/save"]
+          },
+          {
+            "type": "button",
+            "path": "menu_management:delete",
+            "name": "删除",
+            "apis": ["/v1/permission/resource/delete"]
+          },
+          {
+            "type": "button",
+            "path": "menu_management:import",
+            "name": "批量导入",
+            "apis": ["/v1/permission/resource/import"]
+          },
+          {
+            "type": "button",
+            "path": "menu_management:add",
+            "name": "新增菜单",
+            "apis": ["/v1/permission/resource/save"]
+          }
+        ]
+      }
+    ]
+  }
+]

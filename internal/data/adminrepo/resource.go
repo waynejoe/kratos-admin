@@ -80,18 +80,10 @@ func (r *ResourceRepo) getAllChildren(ctx context.Context, depth int, parentIds 
 }
 
 func (r *ResourceRepo) GetAllResource(ctx context.Context) ([]*adminmodel.Resource, error) {
-	var cached []*adminmodel.Resource
-
-	if err := r.cache.Get(ctx, resourceCacheKey, &cached); err == nil {
-		return cached, nil
-	}
-
 	var data []*adminmodel.Resource
 	if err := r.DB(ctx).Find(&data).Error; err != nil {
 		return nil, errorx.WithStack(err)
 	}
-
-	_ = r.cache.Set(ctx, resourceCacheKey, data, resourceCacheTTL)
 
 	return data, nil
 }

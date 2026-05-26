@@ -442,6 +442,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/admin.v1.LoginReply'
+    /v1/user/logout:
+        post:
+            tags:
+                - AdminUser
+            description: 退出登录
+            operationId: AdminUser_Logout
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/admin.v1.LogoutRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/admin.v1.LogoutReply'
     /v1/user/save:
         post:
             tags:
@@ -765,6 +784,12 @@ components:
                     type: string
                 password:
                     type: string
+        admin.v1.LogoutReply:
+            type: object
+            properties: {}
+        admin.v1.LogoutRequest:
+            type: object
+            properties: {}
         admin.v1.OperationLog:
             type: object
             properties:

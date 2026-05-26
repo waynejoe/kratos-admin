@@ -40,6 +40,13 @@ func (s *AdminUserService) Login(ctx context.Context, req *pb.LoginRequest) (*pb
 	return &pb.LoginReply{Token: token}, err
 }
 
+func (s *AdminUserService) Logout(ctx context.Context, _ *pb.LogoutRequest) (*pb.LogoutReply, error) {
+	if err := s.loginUsecase.Logout(ctx); err != nil {
+		return nil, err
+	}
+	return &pb.LogoutReply{}, nil
+}
+
 func (s *AdminUserService) GetUserInfo(ctx context.Context, req *pb.GetUserInfoRequest) (*pb.GetUserInfoReply, error) {
 	return s.adminUserUsecase.GetUserInfo(ctx, req)
 }

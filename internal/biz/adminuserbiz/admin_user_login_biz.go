@@ -13,6 +13,7 @@ import (
 	pb "kratos-admin/pb/admin/v1"
 	"kratos-admin/pkg/model/adminmodel"
 	"kratos-admin/pkg/toolbox/claim"
+	"kratos-admin/pkg/toolbox/helpx"
 )
 
 const AuthAccessKey = "admin:auth:access:%d"
@@ -50,6 +51,14 @@ func (uc *LoginUsecase) Login(ctx context.Context, username, password string) (s
 	}
 
 	return uc.issueToken(ctx, adminUser)
+}
+
+func (uc *LoginUsecase) Logout(ctx context.Context) error {
+	userID := helpx.GetUserId(ctx)
+	if userID == 0 {
+		return pb.ErrorUnauthorized("invalid access token")
+	}
+	return uc.adminUserRepo.GetCache().Del(ctx, fmt.Sprintf(AuthAccessKey, userID))
 }
 
 func (uc *LoginUsecase) issueToken(ctx context.Context, user *adminmodel.AdminUser) (string, error) {

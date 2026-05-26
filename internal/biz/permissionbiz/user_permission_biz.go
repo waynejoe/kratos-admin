@@ -95,13 +95,12 @@ func (uc *UserPermissionUsecase) GetUserDataPermission(ctx context.Context, user
 }
 
 func (s *UserPermissionUsecase) GetUserPermission(ctx context.Context, userId int64) (*pb.UserPermission, bool, error) {
-	permissions := s.authz.GetUserPermissions(ctx, userId)
-
 	raw, err := s.resourceRepo.GetAllResource(ctx)
 	if err != nil {
 		return nil, s.config.ClosePermission, errorx.WithStack(err)
 	}
 
+	permissions := factory.NormalizeUserPermissions(s.authz.GetUserPermissions(ctx, userId), raw)
 	resources := factory.BuildResourceInfos(ctx, 0, raw)
 
 	buttons, pages := factory.NewUserPermission(permissions, resources)

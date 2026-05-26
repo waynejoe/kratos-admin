@@ -59,9 +59,13 @@ func (uc *AdminGroupUsecase) ListGroup(ctx context.Context, req *pb.ListGroupReq
 		return nil, errorx.WithStack(err)
 	}
 
-	operators, err := uc.adminUserRepo.GetsMap(ctx, utils.Map(groups, func(in *adminmodel.AdminGroup) int64 { return in.OperatorId }))
+	operatorList, err := uc.adminUserRepo.RawGetsBy(ctx, "`id` IN ?", utils.Map(groups, func(in *adminmodel.AdminGroup) int64 { return in.OperatorId }))
 	if err != nil {
 		return nil, errorx.WithStack(err)
+	}
+	operators := make(map[int64]*adminmodel.AdminUser)
+	for _, operator := range operatorList {
+		operators[operator.Id] = operator
 	}
 
 	return &pb.ListGroupReply{
@@ -152,7 +156,7 @@ func (uc *AdminGroupUsecase) ListGroupMember(ctx context.Context, req *pb.ListGr
 
 	userIds := utils.CutPage(groupUsers, req.PageIndex, req.PageSize)
 
-	users, err := uc.adminUserRepo.Gets(ctx, userIds)
+	users, err := uc.adminUserRepo.RawGets(ctx, userIds)
 	if err != nil {
 		return nil, errorx.WithStack(err)
 	}

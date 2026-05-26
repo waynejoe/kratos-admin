@@ -732,6 +732,78 @@ func (x *LoginReply) GetToken() string {
 	return ""
 }
 
+type LogoutRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LogoutRequest) Reset() {
+	*x = LogoutRequest{}
+	mi := &file_admin_v1_admin_user_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogoutRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogoutRequest) ProtoMessage() {}
+
+func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_v1_admin_user_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogoutRequest.ProtoReflect.Descriptor instead.
+func (*LogoutRequest) Descriptor() ([]byte, []int) {
+	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{11}
+}
+
+type LogoutReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LogoutReply) Reset() {
+	*x = LogoutReply{}
+	mi := &file_admin_v1_admin_user_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogoutReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogoutReply) ProtoMessage() {}
+
+func (x *LogoutReply) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_v1_admin_user_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogoutReply.ProtoReflect.Descriptor instead.
+func (*LogoutReply) Descriptor() ([]byte, []int) {
+	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{12}
+}
+
 // 优化师
 type Optimizer struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -743,7 +815,7 @@ type Optimizer struct {
 
 func (x *Optimizer) Reset() {
 	*x = Optimizer{}
-	mi := &file_admin_v1_admin_user_proto_msgTypes[11]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -755,7 +827,7 @@ func (x *Optimizer) String() string {
 func (*Optimizer) ProtoMessage() {}
 
 func (x *Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_user_proto_msgTypes[11]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -768,7 +840,7 @@ func (x *Optimizer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Optimizer.ProtoReflect.Descriptor instead.
 func (*Optimizer) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{11}
+	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Optimizer) GetId() int64 {
@@ -793,7 +865,7 @@ type ListOptimizerRequest struct {
 
 func (x *ListOptimizerRequest) Reset() {
 	*x = ListOptimizerRequest{}
-	mi := &file_admin_v1_admin_user_proto_msgTypes[12]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -805,7 +877,7 @@ func (x *ListOptimizerRequest) String() string {
 func (*ListOptimizerRequest) ProtoMessage() {}
 
 func (x *ListOptimizerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_user_proto_msgTypes[12]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -818,7 +890,7 @@ func (x *ListOptimizerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOptimizerRequest.ProtoReflect.Descriptor instead.
 func (*ListOptimizerRequest) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{12}
+	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{14}
 }
 
 type ListOptimizerReply struct {
@@ -831,7 +903,7 @@ type ListOptimizerReply struct {
 
 func (x *ListOptimizerReply) Reset() {
 	*x = ListOptimizerReply{}
-	mi := &file_admin_v1_admin_user_proto_msgTypes[13]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -843,7 +915,7 @@ func (x *ListOptimizerReply) String() string {
 func (*ListOptimizerReply) ProtoMessage() {}
 
 func (x *ListOptimizerReply) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_user_proto_msgTypes[13]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -856,7 +928,7 @@ func (x *ListOptimizerReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOptimizerReply.ProtoReflect.Descriptor instead.
 func (*ListOptimizerReply) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{13}
+	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListOptimizerReply) GetUsers() []*Optimizer {
@@ -886,7 +958,7 @@ type ListOperationLogRequest struct {
 
 func (x *ListOperationLogRequest) Reset() {
 	*x = ListOperationLogRequest{}
-	mi := &file_admin_v1_admin_user_proto_msgTypes[14]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -898,7 +970,7 @@ func (x *ListOperationLogRequest) String() string {
 func (*ListOperationLogRequest) ProtoMessage() {}
 
 func (x *ListOperationLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_user_proto_msgTypes[14]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -911,7 +983,7 @@ func (x *ListOperationLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOperationLogRequest.ProtoReflect.Descriptor instead.
 func (*ListOperationLogRequest) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{14}
+	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListOperationLogRequest) GetPageIndex() int32 {
@@ -968,7 +1040,7 @@ type ListOperationLogReply struct {
 
 func (x *ListOperationLogReply) Reset() {
 	*x = ListOperationLogReply{}
-	mi := &file_admin_v1_admin_user_proto_msgTypes[15]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -980,7 +1052,7 @@ func (x *ListOperationLogReply) String() string {
 func (*ListOperationLogReply) ProtoMessage() {}
 
 func (x *ListOperationLogReply) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_user_proto_msgTypes[15]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -993,7 +1065,7 @@ func (x *ListOperationLogReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOperationLogReply.ProtoReflect.Descriptor instead.
 func (*ListOperationLogReply) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{15}
+	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListOperationLogReply) GetList() []*OperationLog {
@@ -1036,7 +1108,7 @@ type OperationLog struct {
 
 func (x *OperationLog) Reset() {
 	*x = OperationLog{}
-	mi := &file_admin_v1_admin_user_proto_msgTypes[16]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1048,7 +1120,7 @@ func (x *OperationLog) String() string {
 func (*OperationLog) ProtoMessage() {}
 
 func (x *OperationLog) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_user_proto_msgTypes[16]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1061,7 +1133,7 @@ func (x *OperationLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperationLog.ProtoReflect.Descriptor instead.
 func (*OperationLog) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{16}
+	return file_admin_v1_admin_user_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *OperationLog) GetId() int64 {
@@ -1139,7 +1211,7 @@ type AdminUserInfo_UserRole struct {
 
 func (x *AdminUserInfo_UserRole) Reset() {
 	*x = AdminUserInfo_UserRole{}
-	mi := &file_admin_v1_admin_user_proto_msgTypes[17]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1151,7 +1223,7 @@ func (x *AdminUserInfo_UserRole) String() string {
 func (*AdminUserInfo_UserRole) ProtoMessage() {}
 
 func (x *AdminUserInfo_UserRole) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_user_proto_msgTypes[17]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1193,7 +1265,7 @@ type AdminUserInfo_UserGroup struct {
 
 func (x *AdminUserInfo_UserGroup) Reset() {
 	*x = AdminUserInfo_UserGroup{}
-	mi := &file_admin_v1_admin_user_proto_msgTypes[18]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1205,7 +1277,7 @@ func (x *AdminUserInfo_UserGroup) String() string {
 func (*AdminUserInfo_UserGroup) ProtoMessage() {}
 
 func (x *AdminUserInfo_UserGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_user_proto_msgTypes[18]
+	mi := &file_admin_v1_admin_user_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1294,7 +1366,9 @@ const file_admin_v1_admin_user_proto_rawDesc = "" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"\"\n" +
 	"\n" +
 	"LoginReply\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"7\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"\x0f\n" +
+	"\rLogoutRequest\"\r\n" +
+	"\vLogoutReply\"7\n" +
 	"\tOptimizer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
 	"\bnickname\x18\x02 \x01(\tR\bnickname\"\x16\n" +
@@ -1324,10 +1398,11 @@ const file_admin_v1_admin_user_proto_rawDesc = "" +
 	"createTime\x12\x1e\n" +
 	"\n" +
 	"updateTime\x18\t \x01(\x03R\n" +
-	"updateTime2\xee\x04\n" +
+	"updateTime2\xc4\x05\n" +
 	"\tAdminUser\x12P\n" +
 	"\x05Login\x12\x16.admin.v1.LoginRequest\x1a\x14.admin.v1.LoginReply\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/user/login\x12^\n" +
-	"\vGetUserInfo\x12\x1c.admin.v1.GetUserInfoRequest\x1a\x1a.admin.v1.GetUserInfoReply\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/v1/user/info\x12d\n" +
+	"\vGetUserInfo\x12\x1c.admin.v1.GetUserInfoRequest\x1a\x1a.admin.v1.GetUserInfoReply\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/v1/user/info\x12T\n" +
+	"\x06Logout\x12\x17.admin.v1.LogoutRequest\x1a\x15.admin.v1.LogoutReply\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/user/logout\x12d\n" +
 	"\rListAdminUser\x12\x1e.admin.v1.ListAdminUserRequest\x1a\x1c.admin.v1.ListAdminUserReply\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/v1/user/list\x12g\n" +
 	"\rSaveAdminUser\x12\x1e.admin.v1.SaveAdminUserRequest\x1a\x1c.admin.v1.SaveAdminUserReply\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/user/save\x12i\n" +
 	"\rListOptimizer\x12\x1e.admin.v1.ListOptimizerRequest\x1a\x1c.admin.v1.ListOptimizerReply\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/v1/optimizer/list\x12u\n" +
@@ -1345,7 +1420,7 @@ func file_admin_v1_admin_user_proto_rawDescGZIP() []byte {
 	return file_admin_v1_admin_user_proto_rawDescData
 }
 
-var file_admin_v1_admin_user_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_admin_v1_admin_user_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_admin_v1_admin_user_proto_goTypes = []any{
 	(*AdminUserInfo)(nil),           // 0: admin.v1.AdminUserInfo
 	(*ListAdminUserRequest)(nil),    // 1: admin.v1.ListAdminUserRequest
@@ -1358,41 +1433,45 @@ var file_admin_v1_admin_user_proto_goTypes = []any{
 	(*UserPermissioPage)(nil),       // 8: admin.v1.UserPermissioPage
 	(*LoginRequest)(nil),            // 9: admin.v1.LoginRequest
 	(*LoginReply)(nil),              // 10: admin.v1.LoginReply
-	(*Optimizer)(nil),               // 11: admin.v1.Optimizer
-	(*ListOptimizerRequest)(nil),    // 12: admin.v1.ListOptimizerRequest
-	(*ListOptimizerReply)(nil),      // 13: admin.v1.ListOptimizerReply
-	(*ListOperationLogRequest)(nil), // 14: admin.v1.ListOperationLogRequest
-	(*ListOperationLogReply)(nil),   // 15: admin.v1.ListOperationLogReply
-	(*OperationLog)(nil),            // 16: admin.v1.OperationLog
-	(*AdminUserInfo_UserRole)(nil),  // 17: admin.v1.AdminUserInfo.UserRole
-	(*AdminUserInfo_UserGroup)(nil), // 18: admin.v1.AdminUserInfo.UserGroup
-	(*PageInfo)(nil),                // 19: admin.v1.PageInfo
+	(*LogoutRequest)(nil),           // 11: admin.v1.LogoutRequest
+	(*LogoutReply)(nil),             // 12: admin.v1.LogoutReply
+	(*Optimizer)(nil),               // 13: admin.v1.Optimizer
+	(*ListOptimizerRequest)(nil),    // 14: admin.v1.ListOptimizerRequest
+	(*ListOptimizerReply)(nil),      // 15: admin.v1.ListOptimizerReply
+	(*ListOperationLogRequest)(nil), // 16: admin.v1.ListOperationLogRequest
+	(*ListOperationLogReply)(nil),   // 17: admin.v1.ListOperationLogReply
+	(*OperationLog)(nil),            // 18: admin.v1.OperationLog
+	(*AdminUserInfo_UserRole)(nil),  // 19: admin.v1.AdminUserInfo.UserRole
+	(*AdminUserInfo_UserGroup)(nil), // 20: admin.v1.AdminUserInfo.UserGroup
+	(*PageInfo)(nil),                // 21: admin.v1.PageInfo
 }
 var file_admin_v1_admin_user_proto_depIdxs = []int32{
-	17, // 0: admin.v1.AdminUserInfo.roles:type_name -> admin.v1.AdminUserInfo.UserRole
-	18, // 1: admin.v1.AdminUserInfo.groups:type_name -> admin.v1.AdminUserInfo.UserGroup
+	19, // 0: admin.v1.AdminUserInfo.roles:type_name -> admin.v1.AdminUserInfo.UserRole
+	20, // 1: admin.v1.AdminUserInfo.groups:type_name -> admin.v1.AdminUserInfo.UserGroup
 	0,  // 2: admin.v1.ListAdminUserReply.list:type_name -> admin.v1.AdminUserInfo
-	19, // 3: admin.v1.ListAdminUserReply.page:type_name -> admin.v1.PageInfo
+	21, // 3: admin.v1.ListAdminUserReply.page:type_name -> admin.v1.PageInfo
 	7,  // 4: admin.v1.GetUserInfoReply.permissions:type_name -> admin.v1.UserPermission
 	8,  // 5: admin.v1.UserPermission.pages:type_name -> admin.v1.UserPermissioPage
 	8,  // 6: admin.v1.UserPermissioPage.children:type_name -> admin.v1.UserPermissioPage
-	11, // 7: admin.v1.ListOptimizerReply.users:type_name -> admin.v1.Optimizer
-	16, // 8: admin.v1.ListOperationLogReply.list:type_name -> admin.v1.OperationLog
-	19, // 9: admin.v1.ListOperationLogReply.page:type_name -> admin.v1.PageInfo
+	13, // 7: admin.v1.ListOptimizerReply.users:type_name -> admin.v1.Optimizer
+	18, // 8: admin.v1.ListOperationLogReply.list:type_name -> admin.v1.OperationLog
+	21, // 9: admin.v1.ListOperationLogReply.page:type_name -> admin.v1.PageInfo
 	9,  // 10: admin.v1.AdminUser.Login:input_type -> admin.v1.LoginRequest
 	5,  // 11: admin.v1.AdminUser.GetUserInfo:input_type -> admin.v1.GetUserInfoRequest
-	1,  // 12: admin.v1.AdminUser.ListAdminUser:input_type -> admin.v1.ListAdminUserRequest
-	3,  // 13: admin.v1.AdminUser.SaveAdminUser:input_type -> admin.v1.SaveAdminUserRequest
-	12, // 14: admin.v1.AdminUser.ListOptimizer:input_type -> admin.v1.ListOptimizerRequest
-	14, // 15: admin.v1.AdminUser.ListOperationLog:input_type -> admin.v1.ListOperationLogRequest
-	10, // 16: admin.v1.AdminUser.Login:output_type -> admin.v1.LoginReply
-	6,  // 17: admin.v1.AdminUser.GetUserInfo:output_type -> admin.v1.GetUserInfoReply
-	2,  // 18: admin.v1.AdminUser.ListAdminUser:output_type -> admin.v1.ListAdminUserReply
-	4,  // 19: admin.v1.AdminUser.SaveAdminUser:output_type -> admin.v1.SaveAdminUserReply
-	13, // 20: admin.v1.AdminUser.ListOptimizer:output_type -> admin.v1.ListOptimizerReply
-	15, // 21: admin.v1.AdminUser.ListOperationLog:output_type -> admin.v1.ListOperationLogReply
-	16, // [16:22] is the sub-list for method output_type
-	10, // [10:16] is the sub-list for method input_type
+	11, // 12: admin.v1.AdminUser.Logout:input_type -> admin.v1.LogoutRequest
+	1,  // 13: admin.v1.AdminUser.ListAdminUser:input_type -> admin.v1.ListAdminUserRequest
+	3,  // 14: admin.v1.AdminUser.SaveAdminUser:input_type -> admin.v1.SaveAdminUserRequest
+	14, // 15: admin.v1.AdminUser.ListOptimizer:input_type -> admin.v1.ListOptimizerRequest
+	16, // 16: admin.v1.AdminUser.ListOperationLog:input_type -> admin.v1.ListOperationLogRequest
+	10, // 17: admin.v1.AdminUser.Login:output_type -> admin.v1.LoginReply
+	6,  // 18: admin.v1.AdminUser.GetUserInfo:output_type -> admin.v1.GetUserInfoReply
+	12, // 19: admin.v1.AdminUser.Logout:output_type -> admin.v1.LogoutReply
+	2,  // 20: admin.v1.AdminUser.ListAdminUser:output_type -> admin.v1.ListAdminUserReply
+	4,  // 21: admin.v1.AdminUser.SaveAdminUser:output_type -> admin.v1.SaveAdminUserReply
+	15, // 22: admin.v1.AdminUser.ListOptimizer:output_type -> admin.v1.ListOptimizerReply
+	17, // 23: admin.v1.AdminUser.ListOperationLog:output_type -> admin.v1.ListOperationLogReply
+	17, // [17:24] is the sub-list for method output_type
+	10, // [10:17] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
 	10, // [10:10] is the sub-list for extension extendee
 	0,  // [0:10] is the sub-list for field type_name
@@ -1410,7 +1489,7 @@ func file_admin_v1_admin_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_admin_v1_admin_user_proto_rawDesc), len(file_admin_v1_admin_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
