@@ -4,13 +4,13 @@ import (
 	"flag"
 	"log"
 
-	"kratos-admin/pkg/toolbox/authz"
 	"github.com/go-kratos/kratos/v2"
 	klog "github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
 
 	"kratos-admin/internal/conf"
+	"kratos-admin/pkg/toolbox/authz"
 )
 
 var (
@@ -19,7 +19,7 @@ var (
 )
 
 func main() {
-	confPath := flag.String("conf", "configs/config.yaml", "config path")
+	confPath := flag.String("conf", "../../configs/config.yaml", "config path")
 	flag.Parse()
 
 	bc, err := conf.Load(*confPath)
