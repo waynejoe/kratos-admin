@@ -13,7 +13,7 @@ import (
 // DoubleWriteRepo 数据库&缓存双写
 type DoubleWriteRepo[T Entity] struct {
 	Repo[T]
-	kv  KVRepo[T]
+	kv KVRepo[T]
 }
 
 func NewDoubleWriteRepo[T Entity](db *gorm.DB, cache Cache, opts ...func(config *RepoConfig[T])) DoubleWriteRepo[T] {
@@ -94,10 +94,10 @@ func (repo *DoubleWriteRepo[T]) SyncById(ctx context.Context, id int64) error {
 	if _, ok := repo.Tx(ctx); ok {
 		// 事务容错
 		// 补充超时机制，防止泄露
-		timeout, _ := context.WithTimeout(ctx, 3 * time.Second)
+		timeout, _ := context.WithTimeout(ctx, 3*time.Second)
 		go func() {
 			syncCtx := context.Background()
-			 <- timeout.Done()
+			<-timeout.Done()
 			entity, err := repo.RawGet(syncCtx, id)
 			if errors.Is(err, gorm.ErrRecordNotFound) {
 				// 事务提交失败，记录不存在，删除数据

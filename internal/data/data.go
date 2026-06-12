@@ -1,10 +1,10 @@
 package data
 
 import (
-	"kratos-admin/pkg/toolbox/datax"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"kratos-admin/pkg/toolbox/datax"
 )
 
 type Data struct {

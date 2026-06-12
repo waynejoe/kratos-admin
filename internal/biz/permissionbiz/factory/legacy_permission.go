@@ -10,12 +10,12 @@ import (
 
 // 历史 Casbin 策略（page:/system/permission/*）与当前资源 path（menu:team_management）不一致时的别名
 var legacyPermissionAliases = map[string][]string{
-	"menu:/system":                      {"menu:permission"},
-	"menu:/system/permission":           {"menu:permission"},
-	"page:/system/permission/team":      {"menu:team_management"},
-	"page:/system/permission/role":      {"menu:role_management"},
-	"page:/system/permission/user":      {"menu:user_management"},
-	"page:/system/permission/menu":      {"menu:menu_management"},
+	"menu:/system":                 {"menu:permission"},
+	"menu:/system/permission":      {"menu:permission"},
+	"page:/system/permission/team": {"menu:team_management"},
+	"page:/system/permission/role": {"menu:role_management"},
+	"page:/system/permission/user": {"menu:user_management"},
+	"page:/system/permission/menu": {"menu:menu_management"},
 }
 
 // NormalizeUserPermissions 展开旧版策略键，并在检测到旧版超管页面权限时补齐全部资源策略

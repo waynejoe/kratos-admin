@@ -9,9 +9,9 @@ import (
 	"kratos-admin/pkg/toolbox/logx"
 	"kratos-admin/pkg/toolbox/utils"
 
+	"kratos-admin/internal/authz"
 	factory "kratos-admin/internal/biz/permissionbiz/factory"
 	"kratos-admin/internal/biz/permissionbiz/valueobject"
-	"kratos-admin/internal/authz"
 	"kratos-admin/internal/conf"
 	"kratos-admin/internal/data/adminrepo"
 	pb "kratos-admin/pb/admin/v1"

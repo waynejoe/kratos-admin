@@ -1,9 +1,9 @@
 package data
 
 import (
+	"github.com/redis/go-redis/v9"
 	"kratos-admin/pkg/toolbox/authz"
 	"kratos-admin/pkg/toolbox/errorx"
-	"github.com/redis/go-redis/v9"
 
 	"kratos-admin/internal/conf"
 )

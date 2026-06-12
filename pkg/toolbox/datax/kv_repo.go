@@ -6,8 +6,8 @@ import (
 )
 
 type KVRepo[T Entity] struct {
-	cache      Cache
-	config     *RepoConfig[T]
+	cache  Cache
+	config *RepoConfig[T]
 }
 
 func (c *KVRepo[T]) Get(ctx context.Context, id int64) (*T, error) {
